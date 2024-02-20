@@ -15,8 +15,15 @@ const typeorm_1 = require("@nestjs/typeorm");
 const path_1 = require("path");
 const auth_module_1 = require("./auth/auth.module");
 const users_module_1 = require("./users/users.module");
-const users_service_1 = require("./users/users.service");
 const user_entity_1 = require("./users/entities/user.entity");
+const users_service_1 = require("./users/users.service");
+const jwt_1 = require("@nestjs/jwt");
+const roles_module_1 = require("./roles/roles.module");
+const products_module_1 = require("./products/products.module");
+const product_types_module_1 = require("./product_types/product_types.module");
+const services_module_1 = require("./services/services.module");
+const transactions_module_1 = require("./transactions/transactions.module");
+const orders_module_1 = require("./orders/orders.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,9 +42,16 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: true,
             }),
             auth_module_1.AuthModule,
-            users_module_1.UsersModule],
+            users_module_1.UsersModule,
+            roles_module_1.RolesModule,
+            products_module_1.ProductsModule,
+            product_types_module_1.ProductTypesModule,
+            services_module_1.ServicesModule,
+            transactions_module_1.TransactionsModule,
+            orders_module_1.OrdersModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, users_service_1.UsersService],
+        providers: [app_service_1.AppService, users_service_1.UsersService, jwt_1.JwtService
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

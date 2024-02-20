@@ -14,8 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("typeorm");
-const typeorm_2 = require("@nestjs/typeorm");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entities/user.entity");
 let UsersService = class UsersService {
     constructor(userRepository) {
@@ -25,23 +25,27 @@ let UsersService = class UsersService {
         const user = this.userRepository.create(createUserDto);
         return await this.userRepository.save(user);
     }
-    findAll() {
-        return `This action returns all users`;
+    async findAll() {
+        return await this.userRepository.find();
     }
-    findOne(id) {
-        return `This action returns a #${id} user`;
+    async findUserToLogin(username) {
+        return await this.userRepository.find({ where: { username: username } });
     }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+    async findOne(id) {
+        return await this.userRepository.findOne({ where: { id: id } });
     }
-    remove(id) {
-        return `This action removes a #${id} user`;
+    async update(id, updateUserDto) {
+        await this.userRepository.update(id, updateUserDto);
+        return await this.userRepository.findOne({ where: { id: id } });
+    }
+    async remove(id) {
+        return await this.userRepository.delete(id);
     }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

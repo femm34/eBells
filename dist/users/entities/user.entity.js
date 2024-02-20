@@ -10,8 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+const order_entity_1 = require("../../orders/entities/order.entity");
+const role_entity_1 = require("../../roles/entities/role.entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
+    constructor() {
+        this.role = { id: 1 };
+    }
 };
 exports.User = User;
 __decorate([
@@ -34,7 +39,21 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "address", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => role_entity_1.Role, (role) => role.users),
+    (0, typeorm_1.JoinColumn)({ name: 'role_id' }),
+    __metadata("design:type", role_entity_1.Role)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => order_entity_1.Order, (order) => order.user),
+    __metadata("design:type", Array)
+], User.prototype, "orders", void 0);
 exports.User = User = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)(),
+    __metadata("design:paramtypes", [])
 ], User);
 //# sourceMappingURL=user.entity.js.map

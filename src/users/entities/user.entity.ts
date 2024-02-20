@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from 'src/orders/entities/order.entity';
+import { Role } from 'src/roles/entities/role.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -16,4 +18,18 @@ export class User {
 
   @Column()
   password: string
+
+  @Column()
+  address: string
+
+  @ManyToOne(() => Role, (role) => role.users)
+  @JoinColumn({ name: 'role_id' })
+  role: Role
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[]
+
+  constructor() {
+    this.role = { id: 1 } as Role;
+  }
 }
