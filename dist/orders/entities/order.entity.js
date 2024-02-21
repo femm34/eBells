@@ -25,6 +25,18 @@ __decorate([
     __metadata("design:type", Number)
 ], Order.prototype, "quantity", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Order.prototype, "payment_method", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], Order.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], Order.prototype, "updated_at", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.orders),
     (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
     __metadata("design:type", user_entity_1.User)

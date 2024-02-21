@@ -4,9 +4,9 @@ import { UpdateProductTypeDto } from './dto/update-product_type.dto';
 export declare class ProductTypesController {
     private readonly productTypesService;
     constructor(productTypesService: ProductTypesService);
-    create(createProductTypeDto: CreateProductTypeDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateProductTypeDto: UpdateProductTypeDto): string;
-    remove(id: string): string;
+    create(createProductTypeDto: CreateProductTypeDto): Promise<import("./entities/product_type.entity").ProductType>;
+    findAll(): Promise<import("./entities/product_type.entity").ProductType[]>;
+    findOne(id: string): Promise<import("./entities/product_type.entity").ProductType>;
+    update(id: string, updateProductTypeDto: UpdateProductTypeDto): Promise<import("./entities/product_type.entity").ProductType>;
+    remove(id: string): Promise<import("typeorm").DeleteResult>;
 }

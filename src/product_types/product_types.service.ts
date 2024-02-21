@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductTypeDto } from './dto/create-product_type.dto';
 import { UpdateProductTypeDto } from './dto/update-product_type.dto';
+import { Repository } from 'typeorm';
+import { ProductType } from './entities/product_type.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class ProductTypesService {
-  create(createProductTypeDto: CreateProductTypeDto) {
-    return 'This action adds a new productType';
+  constructor(
+    @InjectRepository(ProductType)
+    private productTypeRepository: Repository<ProductType>,
+  ) { }
+  async create(createProductTypeDto: CreateProductTypeDto) {
+    const newProductType = this.productTypeRepository.create(createProductTypeDto)
+    return await this.productTypeRepository.save(newProductType)
   }
 
-  findAll() {
-    return `This action returns all productTypes`;
+  async findAll() {
+    return await this.productTypeRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} productType`;
+  async findOne(id: number) {
+    return await this.productTypeRepository.findOne({ where: { id: id } })
   }
 
-  update(id: number, updateProductTypeDto: UpdateProductTypeDto) {
-    return `This action updates a #${id} productType`;
+  async update(id: number, updateProductTypeDto: UpdateProductTypeDto) {
+    await this.productTypeRepository.update(id, updateProductTypeDto)
+    return await this.productTypeRepository.findOne({ where: { id: id } })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} productType`;
+  async remove(id: number) {
+    return await this.productTypeRepository.delete(id)
   }
 }

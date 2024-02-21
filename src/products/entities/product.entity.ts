@@ -4,6 +4,10 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Product {
+  constructor() {
+    // this.product_type_id = { id: 0 } as ProductType;
+  }
+
   @PrimaryGeneratedColumn({ primaryKeyConstraintName: "product_id" })
   id: number;
 
@@ -14,16 +18,15 @@ export class Product {
   price: number;
 
   @Column()
+  stock: number;
+
+  @Column()
   description: string;
 
-  //PRODUCT_IMAGE_URL
-
-  // PRODUCT_TYPE_ID
 
   @ManyToOne(() => ProductType, (product_type) => product_type.products)
   @JoinColumn({ name: 'product_type_id' })
   product_type_id: ProductType;
-
 
   @OneToMany(() => Order, (order) => order.product)
   orders: Order[]

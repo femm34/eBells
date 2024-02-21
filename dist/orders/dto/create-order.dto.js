@@ -22,6 +22,11 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateOrderDto.prototype, "quantity", void 0);
 __decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOrderDto.prototype, "payment_method", void 0);
+__decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", user_entity_1.User)
 ], CreateOrderDto.prototype, "user", void 0);

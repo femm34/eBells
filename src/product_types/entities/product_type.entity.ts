@@ -11,4 +11,5 @@ export class ProductType {
 
   @OneToMany(() => Product, (product) => product.product_type_id)
   products: Product[]
+
 }
