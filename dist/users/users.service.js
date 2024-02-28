@@ -29,7 +29,7 @@ let UsersService = class UsersService {
         return await this.userRepository.find({ relations: ['role'] });
     }
     async findUserToLogin(username) {
-        return await this.userRepository.find({ where: { username: username } });
+        return await this.userRepository.find({ where: { username: username }, relations: ['role'] });
     }
     async findOne(id) {
         return await this.userRepository.findOne({ where: { id: id } });

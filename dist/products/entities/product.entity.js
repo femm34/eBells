@@ -39,6 +39,10 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
+], Product.prototype, "material", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], Product.prototype, "image_path", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => product_type_entity_1.ProductType, (product_type) => product_type.products),

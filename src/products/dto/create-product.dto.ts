@@ -20,6 +20,10 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   @IsString()
+  material: string;
+
+  @IsNotEmpty()
+  @IsString()
   image_path: string;
 
   @IsOptional()

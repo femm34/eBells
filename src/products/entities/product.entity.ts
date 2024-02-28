@@ -21,6 +21,9 @@ export class Product {
   description: string;
 
   @Column()
+  material: string;
+
+  @Column()
   image_path: string;
 
   @ManyToOne(() => ProductType, (product_type) => product_type.products)

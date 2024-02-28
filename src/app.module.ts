@@ -1,30 +1,34 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { RolesGuard } from './auth/roles.guard';
 import { OrdersModule } from './orders/orders.module';
 import { ProductTypesModule } from './product_types/product_types.module';
 import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 import { ProductsService } from './products/products.service';
+import { Role } from './roles/entities/role.entity';
 import { RolesModule } from './roles/roles.module';
 import { ServicesModule } from './services/services.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
-import { MulterModule } from '@nestjs/platform-express';
+import { RolesService } from './roles/roles.service';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [ConfigModule.forRoot(),
   MulterModule.register({
     dest: './uploads',
   }),
-  TypeOrmModule.forFeature([User, Product]),
+  TypeOrmModule.forFeature([User, Product, Role]),
   TypeOrmModule.forRoot({
     type: 'mysql',
     host: process.env.DB_HOST,
@@ -47,6 +51,10 @@ import { MulterModule } from '@nestjs/platform-express';
     OrdersModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService
+    //    {
+    //   provide: APP_GUARD,
+    //   useClass: RolesGuard,
+    // },
   ],
 })
 export class AppModule { }

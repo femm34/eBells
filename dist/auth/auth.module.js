@@ -14,12 +14,13 @@ const user_entity_1 = require("../users/entities/user.entity");
 const users_service_1 = require("../users/users.service");
 const auth_controller_1 = require("./auth.controller");
 const auth_service_1 = require("./auth.service");
+const role_entity_1 = require("../roles/entities/role.entity");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, role_entity_1.Role]),
             jwt_1.JwtModule.register({
                 global: true,
                 secret: process.env.JWT_SECRET,
