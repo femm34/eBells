@@ -14,8 +14,6 @@ const order_entity_1 = require("../../orders/entities/order.entity");
 const product_type_entity_1 = require("../../product_types/entities/product_type.entity");
 const typeorm_1 = require("typeorm");
 let Product = class Product {
-    constructor() {
-    }
 };
 exports.Product = Product;
 __decorate([
@@ -39,6 +37,10 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "description", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Product.prototype, "image_path", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => product_type_entity_1.ProductType, (product_type) => product_type.products),
     (0, typeorm_1.JoinColumn)({ name: 'product_type_id' }),
     __metadata("design:type", product_type_entity_1.ProductType)
@@ -48,7 +50,6 @@ __decorate([
     __metadata("design:type", Array)
 ], Product.prototype, "orders", void 0);
 exports.Product = Product = __decorate([
-    (0, typeorm_1.Entity)(),
-    __metadata("design:paramtypes", [])
+    (0, typeorm_1.Entity)()
 ], Product);
 //# sourceMappingURL=product.entity.js.map

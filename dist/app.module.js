@@ -26,12 +26,16 @@ const transactions_module_1 = require("./transactions/transactions.module");
 const user_entity_1 = require("./users/entities/user.entity");
 const users_module_1 = require("./users/users.module");
 const users_service_1 = require("./users/users.service");
+const platform_express_1 = require("@nestjs/platform-express");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [config_1.ConfigModule.forRoot(),
+            platform_express_1.MulterModule.register({
+                dest: './uploads',
+            }),
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, product_entity_1.Product]),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',

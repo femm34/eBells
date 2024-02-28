@@ -18,6 +18,10 @@ export class CreateProductDto {
   @IsString()
   description: string;
 
+  @IsNotEmpty()
+  @IsString()
+  image_path: string;
+
   @IsOptional()
   product_type_id: ProductType;
 }

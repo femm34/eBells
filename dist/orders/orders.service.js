@@ -26,7 +26,7 @@ let OrdersService = class OrdersService {
         return await this.orderRepository.save(newOrder);
     }
     async findAll() {
-        return await this.orderRepository.find();
+        return await this.orderRepository.find({ relations: ['user', 'product'] });
     }
     async findOne(id) {
         return await this.orderRepository.findOne({ where: { id: id } });

@@ -26,7 +26,7 @@ let UsersService = class UsersService {
         return await this.userRepository.save(user);
     }
     async findAll() {
-        return await this.userRepository.find();
+        return await this.userRepository.find({ relations: ['role'] });
     }
     async findUserToLogin(username) {
         return await this.userRepository.find({ where: { username: username } });

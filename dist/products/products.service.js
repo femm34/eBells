@@ -26,7 +26,7 @@ let ProductsService = class ProductsService {
         return await this.productRepository.save(newProduct);
     }
     async findAll() {
-        return await this.productRepository.find();
+        return await this.productRepository.find({ relations: ['product_type_id'] });
     }
     async findOne(id) {
         return await this.productRepository.findOne({ where: { id: id } });

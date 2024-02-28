@@ -36,6 +36,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "description", void 0);
 __decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateProductDto.prototype, "image_path", void 0);
+__decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", product_type_entity_1.ProductType)
 ], CreateProductDto.prototype, "product_type_id", void 0);

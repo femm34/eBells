@@ -4,9 +4,6 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Product {
-  constructor() {
-    // this.product_type_id = { id: 0 } as ProductType;
-  }
 
   @PrimaryGeneratedColumn({ primaryKeyConstraintName: "product_id" })
   id: number;
@@ -23,6 +20,8 @@ export class Product {
   @Column()
   description: string;
 
+  @Column()
+  image_path: string;
 
   @ManyToOne(() => ProductType, (product_type) => product_type.products)
   @JoinColumn({ name: 'product_type_id' })

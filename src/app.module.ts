@@ -17,9 +17,13 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [ConfigModule.forRoot(),
+  MulterModule.register({
+    dest: './uploads',
+  }),
   TypeOrmModule.forFeature([User, Product]),
   TypeOrmModule.forRoot({
     type: 'mysql',
