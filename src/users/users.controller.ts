@@ -6,7 +6,11 @@ import { UsersService } from './users.service';
 import { RolesGuard } from 'src/auth/roles.guard';
 
 import { Roles } from 'src/auth/roles.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('Users')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('users')
 export class UsersController {

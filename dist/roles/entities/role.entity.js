@@ -10,9 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Role = void 0;
+const openapi = require("@nestjs/swagger");
 const user_entity_1 = require("../../users/entities/user.entity");
 const typeorm_1 = require("typeorm");
 let Role = class Role {
+    static _OPENAPI_METADATA_FACTORY() {
+        return { id: { required: true, type: () => Number }, role_name: { required: true, type: () => String }, permissions_number: { required: true, type: () => Number }, users: { required: true, type: () => [require("../../users/entities/user.entity").User] } };
+    }
 };
 exports.Role = Role;
 __decorate([

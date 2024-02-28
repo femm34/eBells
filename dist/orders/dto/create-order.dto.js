@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderDto = void 0;
+const openapi = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const product_entity_1 = require("../../products/entities/product.entity");
 const user_entity_1 = require("../../users/entities/user.entity");
 class CreateOrderDto {
+    static _OPENAPI_METADATA_FACTORY() {
+        return { quantity: { required: true, type: () => Number }, payment_method: { required: true, type: () => String }, user: { required: true, type: () => require("../../users/entities/user.entity").User }, product: { required: true, type: () => require("../../products/entities/product.entity").Product } };
+    }
 }
 exports.CreateOrderDto = CreateOrderDto;
 __decorate([
