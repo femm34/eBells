@@ -23,6 +23,8 @@ import { UsersService } from './users/users.service';
 import { RolesService } from './roles/roles.service';
 import { APP_GUARD } from '@nestjs/core';
 import { MaterialsModule } from './materials/materials.module';
+import { AdressesModule } from './adresses/adresses.module';
+import { CardsModule } from './cards/cards.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -50,13 +52,11 @@ import { MaterialsModule } from './materials/materials.module';
     ServicesModule,
     TransactionsModule,
     OrdersModule,
-    MaterialsModule],
+    MaterialsModule,
+    AdressesModule,
+    CardsModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService
-    //    {
-    //   provide: APP_GUARD,
-    //   useClass: RolesGuard,
-    // },
   ],
 })
 export class AppModule { }
