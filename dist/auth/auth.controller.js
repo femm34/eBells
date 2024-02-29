@@ -18,12 +18,13 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_guard_1 = require("./auth.guard");
 const swagger_1 = require("@nestjs/swagger");
+const auth_dto_1 = require("./auth.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    async signIn(signInData) {
-        return await this.authService.signIn(signInData.username, signInData.password);
+    async signIn(authDto) {
+        return await this.authService.signIn(authDto.username, authDto.password);
     }
     getProfile(req) {
         return req.user;
@@ -33,10 +34,12 @@ exports.AuthController = AuthController;
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Endpoint to login' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'You are logged in' }),
     openapi.ApiResponse({ status: common_1.HttpStatus.OK }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [auth_dto_1.AuthDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signIn", null);
 __decorate([

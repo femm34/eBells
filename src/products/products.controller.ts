@@ -10,13 +10,6 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 
-
-// @ApiBearerAuth()
-// @UseGuards(RolesGuard)
-// @Roles('adminstrator')
-// @UseGuards(AuthGuard)
-
-
 @ApiTags('Products')
 @ApiBearerAuth()
 @Controller('products')
@@ -27,22 +20,7 @@ export class ProductsController {
   @Roles('adminstrator')
   @UseGuards(AuthGuard)
   @Post()
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, callback) => {
-          const randomName = Array(32)
-            .fill(null)
-            .map(() => Math.round(Math.random() * 16).toString(16))
-            .join('');
-          return callback(null, `${randomName}${extname(file.originalname)}`);
-        },
-      }),
-    }),
-  )
-  create(@Body() createProductDto: CreateProductDto, @UploadedFile() image: Express.Multer.File) {
-    createProductDto.image_path = `${image.destination}/${image.filename}`;
+  async create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 

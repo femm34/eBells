@@ -12,12 +12,13 @@ const typeorm_1 = require("@nestjs/typeorm");
 const order_entity_1 = require("./entities/order.entity");
 const orders_controller_1 = require("./orders.controller");
 const orders_service_1 = require("./orders.service");
+const role_entity_1 = require("../roles/entities/role.entity");
 let OrdersModule = class OrdersModule {
 };
 exports.OrdersModule = OrdersModule;
 exports.OrdersModule = OrdersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([order_entity_1.Order])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([order_entity_1.Order, role_entity_1.Role])],
         controllers: [orders_controller_1.OrdersController],
         providers: [orders_service_1.OrdersService],
     })
