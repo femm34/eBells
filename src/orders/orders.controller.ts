@@ -4,9 +4,13 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
+@UseGuards(RolesGuard)
+@Roles('adminstrator')
 @UseGuards(AuthGuard)
 @Controller('orders')
 export class OrdersController {

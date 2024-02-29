@@ -4,9 +4,13 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 @ApiTags('Roles')
 @ApiBearerAuth()
+@UseGuards(RolesGuard)
+@Roles('adminstrator')
 @UseGuards(AuthGuard)
 @Controller('roles')
 export class RolesController {

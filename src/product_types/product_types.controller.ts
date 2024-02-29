@@ -4,9 +4,13 @@ import { CreateProductTypeDto } from './dto/create-product_type.dto';
 import { UpdateProductTypeDto } from './dto/update-product_type.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 @ApiTags('Product Types')
 @ApiBearerAuth()
+@UseGuards(RolesGuard)
+@Roles('adminstrator')
 @UseGuards(AuthGuard)
 @Controller('product-types')
 export class ProductTypesController {

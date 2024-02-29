@@ -20,6 +20,8 @@ const create_product_type_dto_1 = require("./dto/create-product_type.dto");
 const update_product_type_dto_1 = require("./dto/update-product_type.dto");
 const auth_guard_1 = require("../auth/auth.guard");
 const swagger_1 = require("@nestjs/swagger");
+const roles_guard_1 = require("../auth/roles.guard");
+const roles_decorator_1 = require("../auth/roles.decorator");
 let ProductTypesController = class ProductTypesController {
     constructor(productTypesService) {
         this.productTypesService = productTypesService;
@@ -84,6 +86,8 @@ __decorate([
 exports.ProductTypesController = ProductTypesController = __decorate([
     (0, swagger_1.ApiTags)('Product Types'),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('adminstrator'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('product-types'),
     __metadata("design:paramtypes", [product_types_service_1.ProductTypesService])
