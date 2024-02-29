@@ -28,6 +28,7 @@ const transactions_module_1 = require("./transactions/transactions.module");
 const user_entity_1 = require("./users/entities/user.entity");
 const users_module_1 = require("./users/users.module");
 const users_service_1 = require("./users/users.service");
+const materials_module_1 = require("./materials/materials.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -56,7 +57,8 @@ exports.AppModule = AppModule = __decorate([
             product_types_module_1.ProductTypesModule,
             services_module_1.ServicesModule,
             transactions_module_1.TransactionsModule,
-            orders_module_1.OrdersModule],
+            orders_module_1.OrdersModule,
+            materials_module_1.MaterialsModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, users_service_1.UsersService, jwt_1.JwtService, products_service_1.ProductsService
         ],

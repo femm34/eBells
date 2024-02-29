@@ -22,6 +22,7 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { RolesService } from './roles/roles.service';
 import { APP_GUARD } from '@nestjs/core';
+import { MaterialsModule } from './materials/materials.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -48,7 +49,8 @@ import { APP_GUARD } from '@nestjs/core';
     ProductTypesModule,
     ServicesModule,
     TransactionsModule,
-    OrdersModule],
+    OrdersModule,
+    MaterialsModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService
     //    {
