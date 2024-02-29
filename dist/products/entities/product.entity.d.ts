@@ -1,3 +1,4 @@
+import { Material } from "src/materials/entities/material.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { ProductType } from "src/product_types/entities/product_type.entity";
 export declare class Product {
@@ -6,8 +7,8 @@ export declare class Product {
     price: number;
     stock: number;
     description: string;
-    material: string;
     image_path: string;
+    material: Material;
     product_type_id: ProductType;
     orders: Order[];
 }

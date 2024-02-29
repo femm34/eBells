@@ -11,12 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const openapi = require("@nestjs/swagger");
+const material_entity_1 = require("../../materials/entities/material.entity");
 const order_entity_1 = require("../../orders/entities/order.entity");
 const product_type_entity_1 = require("../../product_types/entities/product_type.entity");
 const typeorm_1 = require("typeorm");
 let Product = class Product {
     static _OPENAPI_METADATA_FACTORY() {
-        return { id: { required: true, type: () => Number }, product_name: { required: true, type: () => String }, price: { required: true, type: () => Number }, stock: { required: true, type: () => Number }, description: { required: true, type: () => String }, material: { required: true, type: () => String }, image_path: { required: true, type: () => String }, product_type_id: { required: true, type: () => require("../../product_types/entities/product_type.entity").ProductType }, orders: { required: true, type: () => [require("../../orders/entities/order.entity").Order] } };
+        return { id: { required: true, type: () => Number }, product_name: { required: true, type: () => String }, price: { required: true, type: () => Number }, stock: { required: true, type: () => Number }, description: { required: true, type: () => String }, image_path: { required: true, type: () => String }, material: { required: true, type: () => require("../../materials/entities/material.entity").Material }, product_type_id: { required: true, type: () => require("../../product_types/entities/product_type.entity").ProductType }, orders: { required: true, type: () => [require("../../orders/entities/order.entity").Order] } };
     }
 };
 exports.Product = Product;
@@ -43,11 +44,12 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Product.prototype, "material", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
 ], Product.prototype, "image_path", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => material_entity_1.Material, (material) => material.products),
+    (0, typeorm_1.JoinColumn)({ name: 'material_id' }),
+    __metadata("design:type", material_entity_1.Material)
+], Product.prototype, "material", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => product_type_entity_1.ProductType, (product_type) => product_type.products),
     (0, typeorm_1.JoinColumn)({ name: 'product_type_id' }),

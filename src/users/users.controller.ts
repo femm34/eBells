@@ -8,34 +8,47 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 
 @ApiTags('Users')
-@ApiBearerAuth()
-@UseGuards(RolesGuard)
-@Roles('adminstrator')
-@UseGuards(AuthGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
-  @Roles('adminstrator')
+
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
+
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles('adminstrator')
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles('adminstrator')
+  @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles('adminstrator')
+  @UseGuards(AuthGuard)
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles('adminstrator')
+  @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

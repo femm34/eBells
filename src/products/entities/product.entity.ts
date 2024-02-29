@@ -1,3 +1,4 @@
+import { Material } from "src/materials/entities/material.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { ProductType } from "src/product_types/entities/product_type.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -21,10 +22,11 @@ export class Product {
   description: string;
 
   @Column()
-  material: string;
-
-  @Column()
   image_path: string;
+
+  @ManyToOne(() => Material, (material) => material.products)
+  @JoinColumn({ name: 'material_id' })
+  material: Material
 
   @ManyToOne(() => ProductType, (product_type) => product_type.products)
   @JoinColumn({ name: 'product_type_id' })

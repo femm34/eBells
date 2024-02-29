@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { Material } from "src/materials/entities/material.entity";
 import { ProductType } from "src/product_types/entities/product_type.entity";
 
 export class CreateProductDto {
@@ -18,9 +19,9 @@ export class CreateProductDto {
   @IsString()
   description: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  material: string;
+  material: Material;
 
   @IsNotEmpty()
   @IsString()
@@ -29,45 +30,3 @@ export class CreateProductDto {
   @IsOptional()
   product_type_id: ProductType;
 }
-
-
-
-// import { ApiProperty } from '@nestjs/swagger';
-// import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-// // import { File } from 'src/common/interfaces/file.interface';
-
-// export class CreateProductDto {
-//   @IsNotEmpty()
-//   @IsString()
-//   @ApiProperty({ type: 'string', format: 'binary' })
-//   image: File;
-
-//   @IsNotEmpty()
-//   @IsString()
-//   @ApiProperty()
-//   product_name: string;
-
-//   @IsNotEmpty()
-//   @IsNumber()
-//   @ApiProperty()
-//   price: number;
-
-//   @IsNotEmpty()
-//   @IsNumber()
-//   @ApiProperty()
-//   stock: number;
-
-//   @IsNotEmpty()
-//   @IsString()
-//   @ApiProperty()
-//   description: string;
-
-//   @IsNotEmpty()
-//   @IsString()
-//   @ApiProperty()
-//   material: string;
-
-//   @IsOptional()
-//   @ApiProperty({ type: 'string', format: 'binary' })
-//   product_type_id?: File;
-// }

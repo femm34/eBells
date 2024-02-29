@@ -44,7 +44,6 @@ let UsersController = class UsersController {
 };
 exports.UsersController = UsersController;
 __decorate([
-    (0, roles_decorator_1.Roles)('adminstrator'),
     (0, common_1.Post)(),
     openapi.ApiResponse({ status: 201, type: require("./entities/user.entity").User }),
     __param(0, (0, common_1.Body)()),
@@ -53,6 +52,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('adminstrator'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)(),
     openapi.ApiResponse({ status: 200, type: [require("./entities/user.entity").User] }),
     __metadata("design:type", Function),
@@ -60,6 +63,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('adminstrator'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)(':id'),
     openapi.ApiResponse({ status: 200, type: require("./entities/user.entity").User }),
     __param(0, (0, common_1.Param)('id')),
@@ -68,6 +75,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('adminstrator'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Put)(':id'),
     openapi.ApiResponse({ status: 200, type: require("./entities/user.entity").User }),
     __param(0, (0, common_1.Param)('id')),
@@ -77,6 +88,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('adminstrator'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Delete)(':id'),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
@@ -86,10 +101,6 @@ __decorate([
 ], UsersController.prototype, "remove", null);
 exports.UsersController = UsersController = __decorate([
     (0, swagger_1.ApiTags)('Users'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)('adminstrator'),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
