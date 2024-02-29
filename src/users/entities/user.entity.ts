@@ -30,6 +30,6 @@ export class User {
   orders: Order[]
 
   constructor() {
-    this.role = { id: 1 } as Role;
+    this.role = { id: 2 } as Role; //this automatically sets the user role as 2 that is equal to "client" role
   }
 }

@@ -16,7 +16,7 @@ const role_entity_1 = require("../../roles/entities/role.entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
     constructor() {
-        this.role = { id: 1 };
+        this.role = { id: 2 };
     }
     static _OPENAPI_METADATA_FACTORY() {
         return { id: { required: true, type: () => Number }, full_name: { required: true, type: () => String }, email: { required: true, type: () => String }, username: { required: true, type: () => String }, password: { required: true, type: () => String }, address: { required: true, type: () => String }, role: { required: true, type: () => require("../../roles/entities/role.entity").Role }, orders: { required: true, type: () => [require("../../orders/entities/order.entity").Order] } };
