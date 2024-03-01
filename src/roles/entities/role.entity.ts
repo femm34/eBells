@@ -9,9 +9,6 @@ export class Role {
   @Column()
   role_name: string
 
-  @Column()
-  permissions_number: number
-
   @OneToMany(() => User, (user) => user.role)
   users: User[]
 }

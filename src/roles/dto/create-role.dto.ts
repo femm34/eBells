@@ -4,8 +4,4 @@ export class CreateRoleDto {
   @IsNotEmpty()
   @IsString()
   role_name: string
-
-  @IsNotEmpty()
-  @IsString()
-  permissions_number: number
 }
