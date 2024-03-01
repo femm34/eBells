@@ -1,8 +1,10 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-export class Adress {
+@Entity()
+export class Address {
   @PrimaryGeneratedColumn({ primaryKeyConstraintName: "address_id" })
-  id: number
+  id: number;
 
   @Column()
   recipient_name: string;
@@ -34,5 +36,8 @@ export class Adress {
   @Column()
   landmarks: string;
 
-  //user id
+  @ManyToOne(() => User, (user) => user.addresses)
+  @JoinColumn({ name: "user_id" })
+  user: User
+
 }

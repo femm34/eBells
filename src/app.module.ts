@@ -7,7 +7,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { RolesGuard } from './auth/roles.guard';
+import { CardsModule } from './cards/cards.module';
+import { MaterialsModule } from './materials/materials.module';
 import { OrdersModule } from './orders/orders.module';
 import { ProductTypesModule } from './product_types/product_types.module';
 import { Product } from './products/entities/product.entity';
@@ -20,11 +21,8 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
-import { RolesService } from './roles/roles.service';
-import { APP_GUARD } from '@nestjs/core';
-import { MaterialsModule } from './materials/materials.module';
-import { AdressesModule } from './adresses/adresses.module';
-import { CardsModule } from './cards/cards.module';
+import { AddressesModule } from './addresses/addresses.module';
+
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -53,8 +51,8 @@ import { CardsModule } from './cards/cards.module';
     TransactionsModule,
     OrdersModule,
     MaterialsModule,
-    AdressesModule,
-    CardsModule],
+    CardsModule,
+    AddressesModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService
   ],
