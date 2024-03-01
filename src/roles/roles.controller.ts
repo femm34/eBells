@@ -10,7 +10,7 @@ import { Roles } from 'src/auth/roles.decorator';
 @ApiTags('Roles')
 @ApiBearerAuth()
 @UseGuards(RolesGuard)
-@Roles('sudos')
+@Roles('sudo', 'administrator')
 @UseGuards(AuthGuard)
 @Controller('roles')
 export class RolesController {

@@ -10,12 +10,12 @@ import { Roles } from 'src/auth/roles.decorator';
 @ApiTags('Services')
 @ApiBearerAuth()
 @UseGuards(RolesGuard)
-@Roles('adminstrator')
 @UseGuards(AuthGuard)
 @Controller('services')
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) { }
 
+  @Roles('adminstrator', 'sudo')
   @Post()
   create(@Body() createServiceDto: CreateServiceDto) {
     return this.servicesService.create(createServiceDto);
@@ -31,11 +31,13 @@ export class ServicesController {
     return this.servicesService.findOne(+id);
   }
 
+  @Roles('adminstrator', 'sudo')
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
     return this.servicesService.update(+id, updateServiceDto);
   }
 
+  @Roles('adminstrator', 'sudo')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.servicesService.remove(+id);

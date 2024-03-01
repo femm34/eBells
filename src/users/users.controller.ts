@@ -20,7 +20,7 @@ export class UsersController {
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('adminstrator', 'sudo')
   @UseGuards(AuthGuard)
   @Get()
   findAll() {
@@ -29,7 +29,7 @@ export class UsersController {
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('adminstrator', 'sudo')
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -38,7 +38,7 @@ export class UsersController {
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('sudo')
   @UseGuards(AuthGuard)
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -47,7 +47,7 @@ export class UsersController {
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('sudo')
   @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {

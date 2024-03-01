@@ -10,7 +10,7 @@ import { Roles } from 'src/auth/roles.decorator';
 @ApiTags('Orders')
 @ApiBearerAuth()
 @UseGuards(RolesGuard)
-@Roles('adminstrator')
+@Roles('adminstrator', 'sudo')
 @UseGuards(AuthGuard)
 @Controller('orders')
 export class OrdersController {
@@ -21,11 +21,13 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
 
+  @Roles('adminstrator', 'sudo', 'client')
   @Get()
   findAll() {
     return this.ordersService.findAll();
   }
 
+  @Roles('adminstrator', 'sudo', 'client')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(+id);

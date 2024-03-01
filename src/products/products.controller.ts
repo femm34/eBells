@@ -14,7 +14,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('adminstrator', 'sudo')
   @UseGuards(AuthGuard)
   @Post()
   async create(@Body() createProductDto: CreateProductDto) {
@@ -32,7 +32,7 @@ export class ProductsController {
   }
 
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('adminstrator', 'sudo')
   @UseGuards(AuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
@@ -40,7 +40,7 @@ export class ProductsController {
   }
 
   @UseGuards(RolesGuard)
-  @Roles('adminstrator')
+  @Roles('adminstrator', 'sudo')
   @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {

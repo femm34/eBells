@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { AddressesService } from './addresses.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { AuthGuard } from 'src/auth/auth.guard';
 
+
+@ApiTags('Address')
+@ApiBearerAuth()
+@UseGuards(RolesGuard)
+@Roles('client', 'sudo')
+@UseGuards(AuthGuard)
 @Controller('addresses')
 export class AddressesController {
   constructor(private readonly addressesService: AddressesService) { }

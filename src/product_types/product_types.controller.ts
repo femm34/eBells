@@ -10,7 +10,7 @@ import { Roles } from 'src/auth/roles.decorator';
 @ApiTags('Product Types')
 @ApiBearerAuth()
 @UseGuards(RolesGuard)
-@Roles('adminstrator')
+@Roles('adminstrator', 'sudo')
 @UseGuards(AuthGuard)
 @Controller('product-types')
 export class ProductTypesController {
@@ -21,11 +21,13 @@ export class ProductTypesController {
     return this.productTypesService.create(createProductTypeDto);
   }
 
+  @Roles('adminstrator', 'sudo', 'client')
   @Get()
   findAll() {
     return this.productTypesService.findAll();
   }
 
+  @Roles('adminstrator', 'sudo', 'client')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productTypesService.findOne(+id);
