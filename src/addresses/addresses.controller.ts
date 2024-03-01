@@ -5,7 +5,7 @@ import { UpdateAddressDto } from './dto/update-address.dto';
 
 @Controller('addresses')
 export class AddressesController {
-  constructor(private readonly addressesService: AddressesService) {}
+  constructor(private readonly addressesService: AddressesService) { }
 
   @Post()
   create(@Body() createAddressDto: CreateAddressDto) {
