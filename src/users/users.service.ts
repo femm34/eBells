@@ -17,13 +17,13 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.userRepository.find({ relations: ['role'] })
+    return await this.userRepository.find({ relations: ['role', 'role.id'] })
   }
   async findUserToLogin(username: string) {
     return await this.userRepository.find({ where: { username: username }, relations: ['role'] })
   }
   async findOne(id: number) {
-    return await this.userRepository.findOne({ where: { id: id } })
+    return await this.userRepository.findOne({ where: { id: id }, relations: ['role', 'role.id'] })
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {

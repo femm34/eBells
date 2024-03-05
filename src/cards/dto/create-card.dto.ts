@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { User } from "src/users/entities/user.entity";
 
 export class CreateCardDto {
   @IsNotEmpty()
@@ -17,5 +18,8 @@ export class CreateCardDto {
   @IsString()
   cardholder: string;
 
+  @IsNotEmpty()
+  @IsNumber()
+  user_id: User;
   // user id
 }

@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { User } from "src/users/entities/user.entity";
 
 export class CreateAddressDto {
   @IsNotEmpty()
@@ -41,5 +42,7 @@ export class CreateAddressDto {
   @IsString()
   landmarks: string;
 
-  // user id
+  @IsNotEmpty()
+  @IsNumber()
+  user: User;
 }
