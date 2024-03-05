@@ -18,11 +18,11 @@ export class CardsService {
   }
 
   async findAll() {
-    return await this.cardRepository.find({ relations: ['user'] })
+    return await this.cardRepository.find({ relations: ['user', 'user.role'] })
   }
 
   async findOne(id: number) {
-    return await this.cardRepository.findOne({ where: { id: id }, relations: ['user'] })
+    return await this.cardRepository.findOne({ where: { id: id }, relations: ['user', 'user.role'] })
   }
 
   async update(id: number, updateCardDto: UpdateCardDto) {
