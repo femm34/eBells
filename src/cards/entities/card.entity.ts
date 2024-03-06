@@ -1,5 +1,6 @@
+import { Order } from "src/orders/entities/order.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Card {
@@ -18,8 +19,10 @@ export class Card {
   @Column()
   cardholder: string;
 
-  //user id
   @ManyToOne(() => User, (user) => user.cards)
   @JoinColumn({ name: "user_id" })
   user: User
+
+  @OneToMany(() => Order, (order) => order.card)
+  order: Order[]
 }

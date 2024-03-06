@@ -1,3 +1,4 @@
+import { Card } from "src/cards/entities/card.entity";
 import { Product } from "src/products/entities/product.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
@@ -22,6 +23,10 @@ export class Order {
   @ManyToOne(() => User, (user) => user.orders)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @ManyToOne(() => Card, (card) => card.order)
+  @JoinColumn({ name: 'card_id' })
+  card: Card;
 
   @ManyToOne(() => Product, (product) => product.orders)
   @JoinColumn({ name: 'product_id' })
