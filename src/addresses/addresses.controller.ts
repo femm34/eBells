@@ -8,7 +8,7 @@ import { Roles } from 'src/auth/roles.decorator';
 import { AuthGuard } from 'src/auth/auth.guard';
 
 
-@ApiTags('Address')
+@ApiTags('Addresses')
 @ApiBearerAuth()
 @UseGuards(RolesGuard)
 @Roles('client', 'sudo')
