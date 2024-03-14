@@ -6,5 +6,5 @@ export class CreateServiceDto {
 
   @IsNotEmpty()
   @IsString()
-  service_desciption: string;
+  service_description: string;
 }
