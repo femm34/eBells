@@ -11,5 +11,6 @@ export class Service {
   @Column()
   service_description: string
 
-  //service_image_url
+  @Column()
+  service_image_url: string
 }

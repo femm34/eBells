@@ -7,4 +7,8 @@ export class CreateServiceDto {
   @IsNotEmpty()
   @IsString()
   service_description: string;
+
+  @IsNotEmpty()
+  @IsString()
+  service_image_url: string;
 }
