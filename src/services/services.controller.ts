@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { ServicesService } from './services.service';
-import { CreateServiceDto } from './dto/create-service.dto';
-import { UpdateServiceDto } from './dto/update-service.dto';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
+import { ServicesService } from './services.service';
 
 @ApiTags('Services')
 @ApiBearerAuth()
@@ -32,8 +32,8 @@ export class ServicesController {
 
   @Roles('adminstrator', 'sudo')
   @UseGuards(RolesGuard, AuthGuard)
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto): Promise<import("/Users/bin/scholar_projects/e-bells/src/services/entities/service.entity").Service> {
     return this.servicesService.update(+id, updateServiceDto);
   }
 
