@@ -22,6 +22,7 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { AddressesModule } from './addresses/addresses.module';
+import { PortfolioModule } from './portfolio/portfolio.module';
 
 
 @Module({
@@ -52,7 +53,8 @@ import { AddressesModule } from './addresses/addresses.module';
     OrdersModule,
     MaterialsModule,
     CardsModule,
-    AddressesModule],
+    AddressesModule,
+    PortfolioModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService
   ],
