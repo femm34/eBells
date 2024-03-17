@@ -33,7 +33,7 @@ export class ServicesController {
   @Roles('adminstrator', 'sudo')
   @UseGuards(RolesGuard, AuthGuard)
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto): Promise<import("/Users/bin/scholar_projects/e-bells/src/services/entities/service.entity").Service> {
+  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
     return this.servicesService.update(+id, updateServiceDto);
   }
 
