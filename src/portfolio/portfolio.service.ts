@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Portfolio } from './entities/portfolio.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PortfolioService {
-  create(createPortfolioDto: CreatePortfolioDto) {
-    return 'This action adds a new portfolio';
+  constructor(
+    @InjectRepository(Portfolio)
+    private portfolioRepository: Repository<Portfolio>,
+  ) { }
+  async create(createPortfolioDto: CreatePortfolioDto) {
+    const newPortfolioItem = this.portfolioRepository.create(createPortfolioDto)
+    return await this.portfolioRepository.save(newPortfolioItem);
   }
 
-  findAll() {
-    return `This action returns all portfolio`;
+  async findAll() {
+    return await this.portfolioRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} portfolio`;
+  async findOne(id: number) {
+    return await this.portfolioRepository.findOne({ where: { id: id } })
   }
 
-  update(id: number, updatePortfolioDto: UpdatePortfolioDto) {
-    return `This action updates a #${id} portfolio`;
+  async update(id: number, updatePortfolioDto: UpdatePortfolioDto) {
+    await this.portfolioRepository.update(id, updatePortfolioDto)
+    return await this.portfolioRepository.findOne({ where: { id: id } })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} portfolio`;
+  async remove(id: number) {
+    return await this.portfolioRepository.delete(id)
   }
 }
