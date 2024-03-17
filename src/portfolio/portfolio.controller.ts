@@ -10,14 +10,13 @@ import { PortfolioService } from './portfolio.service';
 
 @ApiTags('Portfolio')
 @ApiBearerAuth()
-
 @Controller('portfolio')
 export class PortfolioController {
   constructor(private readonly portfolioService: PortfolioService) { }
 
 
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
-  @UseGuards(RolesGuard, AuthGuard)
   @Post()
   create(@Body() createPortfolioDto: CreatePortfolioDto) {
     return this.portfolioService.create(createPortfolioDto);
@@ -33,15 +32,15 @@ export class PortfolioController {
     return this.portfolioService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
-  @UseGuards(RolesGuard, AuthGuard)
   @Put(':id')
   update(@Param('id') id: string, @Body() updatePortfolioDto: UpdatePortfolioDto) {
     return this.portfolioService.update(+id, updatePortfolioDto);
   }
 
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
-  @UseGuards(RolesGuard, AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.portfolioService.remove(+id);
