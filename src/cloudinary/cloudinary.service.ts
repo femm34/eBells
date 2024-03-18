@@ -39,11 +39,33 @@ export class CloudinaryService {
     });
   }
 
+  async updateImage(
+    publicId: string,
+    file: Express.Multer.File,
+    folderName: string,
+    width: number,
+    height: number,
+    cropMode: string = "fill",
+    quality: number = 80
+  ): Promise<UploadApiResponse | UploadApiErrorResponse> {
+    return new Promise((resolve, reject) => {
+      const upload = v2.uploader.upload_stream(
+        {
+          public_id: publicId,
+          folder: folderName,
+          width: width,
+          height: height,
+          crop: cropMode,
+          quality: quality,
+        },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
 
-  getPublicIdFromUrl(imageUrl: string): string {
-    const parsedUrl = new URL(imageUrl);
-    const pathSegments = parsedUrl.pathname.split('/');
-    const publicIdIndex = pathSegments.indexOf('upload') + 1;
-    return pathSegments[publicIdIndex];
+      toStream(file.buffer).pipe(upload);
+    });
   }
+
 }

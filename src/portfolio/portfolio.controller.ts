@@ -1,14 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { extractPublicId } from 'cloudinary-build-url';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfolioService } from './portfolio.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
-import { extractPublicId } from 'cloudinary-build-url'
+import { cloudinaryFolders } from 'src/config/constants/cloudinaryFolders';
 
 
 @ApiTags('Portfolio')
@@ -23,7 +24,7 @@ export class PortfolioController {
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async create(@UploadedFile() image: Express.Multer.File, @Body() createPortfolioDto: CreatePortfolioDto): Promise<any> {
-    const imageUrl = await this.cloudinaryService.uploadImage(image, 'portfolioImages', 300, 300);
+    const imageUrl = await this.cloudinaryService.uploadImage(image, cloudinaryFolders.portfolio, 300, 300);
     const savedData = {
       work_name: createPortfolioDto.work_name,
       work_image_url: imageUrl.secure_url,
@@ -44,8 +45,19 @@ export class PortfolioController {
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
   @Put(':id')
-  update(@Param('id') id: string, @Body() updatePortfolioDto: UpdatePortfolioDto) {
-    return this.portfolioService.update(+id, updatePortfolioDto);
+  @UseInterceptors(FileInterceptor('image'))
+  async update(@UploadedFile() image: Express.Multer.File, @Param('id') id: string, @Body() updatePortfolioDto: UpdatePortfolioDto) {
+    const portfolio = await this.portfolioService.findOne(+id);
+    if (!portfolio) {
+      throw new NotFoundException('Portfolio not found');
+    }
+    let publicId = extractPublicId(portfolio.work_image_url);
+    const imageUrl = await this.cloudinaryService.updateImage(publicId.split("/")[1], image, cloudinaryFolders.portfolio, 300, 300);
+    const savedData = {
+      work_name: updatePortfolioDto.work_name,
+      work_image_url: imageUrl.secure_url,
+    };
+    return this.portfolioService.update(+id, savedData);
   }
 
   @UseGuards(AuthGuard, RolesGuard)
