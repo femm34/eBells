@@ -17,20 +17,12 @@ export class PortfolioController {
   constructor(private readonly portfolioService: PortfolioService,
     private cloudinaryService: CloudinaryService) { }
 
-
-  // @UseGuards(AuthGuard, RolesGuard)
-  // @Roles('adminstrator', 'sudo')
-  // @Post()
-  // create(@Body() createPortfolioDto: CreatePortfolioDto) {
-  //   return this.portfolioService.create(createPortfolioDto);
-  // }
-
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async create(@UploadedFile() image: Express.Multer.File, @Body() createPortfolioDto: CreatePortfolioDto): Promise<any> {
-    const imageUrl = await this.cloudinaryService.uploadImage(image);
+    const imageUrl = await this.cloudinaryService.uploadImage(image, 'portfolioImages', 300, 300);
     const savedData = {
       work_name: createPortfolioDto.work_name,
       work_image_url: imageUrl.secure_url,
