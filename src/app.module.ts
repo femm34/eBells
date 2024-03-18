@@ -4,12 +4,15 @@ import { JwtService } from '@nestjs/jwt';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { AddressesModule } from './addresses/addresses.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CardsModule } from './cards/cards.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { MaterialsModule } from './materials/materials.module';
 import { OrdersModule } from './orders/orders.module';
+import { PortfolioModule } from './portfolio/portfolio.module';
 import { ProductTypesModule } from './product_types/product_types.module';
 import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
@@ -21,8 +24,8 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
-import { AddressesModule } from './addresses/addresses.module';
-import { PortfolioModule } from './portfolio/portfolio.module';
+
+
 
 
 @Module({
@@ -54,9 +57,10 @@ import { PortfolioModule } from './portfolio/portfolio.module';
     MaterialsModule,
     CardsModule,
     AddressesModule,
-    PortfolioModule],
+    PortfolioModule,
+    CloudinaryModule],
   controllers: [AppController],
-  providers: [AppService, UsersService, JwtService, ProductsService
+  providers: [AppService, UsersService, JwtService, ProductsService,
   ],
 })
 export class AppModule { }

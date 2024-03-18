@@ -4,14 +4,24 @@ import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Portfolio } from './entities/portfolio.entity';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PortfolioService {
   constructor(
     @InjectRepository(Portfolio)
     private portfolioRepository: Repository<Portfolio>,
+    private cloudinaryService: CloudinaryService,
   ) { }
   async create(createPortfolioDto: CreatePortfolioDto) {
+    // const uploadedImage = await this.cloudinaryService.uploadImage(createPortfolioDto.work_image_url);
+    // const newPortfolioItem = this.portfolioRepository.create({
+    //   work_name: createPortfolioDto.work_name,
+    //   work_image_url: uploadedImage.secure_url
+    // });
+
+    // return await this.portfolioRepository.save(newPortfolioItem);
+
     const newPortfolioItem = this.portfolioRepository.create(createPortfolioDto)
     return await this.portfolioRepository.save(newPortfolioItem);
   }
