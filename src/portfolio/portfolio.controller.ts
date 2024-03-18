@@ -8,6 +8,7 @@ import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfolioService } from './portfolio.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { extractPublicId } from 'cloudinary-build-url'
 
 
 @ApiTags('Portfolio')
@@ -50,7 +51,20 @@ export class PortfolioController {
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('adminstrator', 'sudo')
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
+    const portfolio = await this.portfolioService.findOne(+id);
+    if (!portfolio) {
+      return {
+        success: false, message: 'Portfolio doesnt exist'
+      };
+    }
+
+    if (portfolio.work_image_url) {
+      const publicId = extractPublicId(portfolio.work_image_url);
+      console.log(publicId)
+      await this.cloudinaryService.deleteImage(publicId);
+    }
+
     return this.portfolioService.remove(+id);
   }
 }

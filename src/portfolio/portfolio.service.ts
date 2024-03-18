@@ -14,14 +14,6 @@ export class PortfolioService {
     private cloudinaryService: CloudinaryService,
   ) { }
   async create(createPortfolioDto: CreatePortfolioDto) {
-    // const uploadedImage = await this.cloudinaryService.uploadImage(createPortfolioDto.work_image_url);
-    // const newPortfolioItem = this.portfolioRepository.create({
-    //   work_name: createPortfolioDto.work_name,
-    //   work_image_url: uploadedImage.secure_url
-    // });
-
-    // return await this.portfolioRepository.save(newPortfolioItem);
-
     const newPortfolioItem = this.portfolioRepository.create(createPortfolioDto)
     return await this.portfolioRepository.save(newPortfolioItem);
   }

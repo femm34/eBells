@@ -19,7 +19,7 @@ export class CloudinaryService {
           width: width,
           height: height,
           crop: cropMode,
-          quality: quality
+          quality: quality,
         },
         (error, result) => {
           if (error) return reject(error);
@@ -39,4 +39,11 @@ export class CloudinaryService {
     });
   }
 
+
+  getPublicIdFromUrl(imageUrl: string): string {
+    const parsedUrl = new URL(imageUrl);
+    const pathSegments = parsedUrl.pathname.split('/');
+    const publicIdIndex = pathSegments.indexOf('upload') + 1;
+    return pathSegments[publicIdIndex];
+  }
 }
