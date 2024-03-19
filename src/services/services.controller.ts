@@ -9,13 +9,14 @@ import { ServicesService } from './services.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { cloudinaryFolders } from 'src/config/constants/cloudinaryFolders';
 import { extractPublicId } from 'cloudinary-build-url';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @ApiTags('Services')
 @ApiBearerAuth()
 @Controller('services')
 export class ServicesController {
-  cloudinaryService: any;
-  constructor(private readonly servicesService: ServicesService) { }
+  constructor(private readonly servicesService: ServicesService,
+    private cloudinaryService: CloudinaryService) { }
 
 
   @UseGuards(AuthGuard, RolesGuard)
