@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Portfolio } from './entities/portfolio.entity';
-import { Repository } from 'typeorm';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PortfolioService {
   constructor(
     @InjectRepository(Portfolio)
     private portfolioRepository: Repository<Portfolio>,
-    private cloudinaryService: CloudinaryService,
   ) { }
   async create(createPortfolioDto: CreatePortfolioDto) {
     const newPortfolioItem = this.portfolioRepository.create(createPortfolioDto)

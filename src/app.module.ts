@@ -25,14 +25,13 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 
-
-
-
 @Module({
   imports: [ConfigModule.forRoot(),
+
   MulterModule.register({
     dest: './uploads',
   }),
+
   TypeOrmModule.forFeature([User, Product, Role]),
   TypeOrmModule.forRoot({
     type: 'mysql',

@@ -16,7 +16,12 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document);
+  SwaggerModule.setup('docs', app, document, {
+    swaggerOptions: {
+      docExpansion: 'none',
+      tagsSorter: 'alpha',
+    },
+  });
   await app.listen(3000);
 }
 bootstrap();
