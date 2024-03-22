@@ -24,7 +24,7 @@ export class PortfolioController {
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async create(@UploadedFile() image: Express.Multer.File, @Body() createPortfolioDto: CreatePortfolioDto): Promise<any> {
-    const imageUrl = await this.cloudinaryService.uploadImage(image, cloudinaryFolders.portfolio, 750, 500);
+    const imageUrl = await this.cloudinaryService.uploadImage(image, cloudinaryFolders.portfolio, 850, 500);
     const savedData = {
       work_name: createPortfolioDto.work_name,
       work_image_url: imageUrl.secure_url,
@@ -52,7 +52,7 @@ export class PortfolioController {
       throw new NotFoundException('Portfolio not found');
     }
     let publicId = extractPublicId(portfolio.work_image_url);
-    const imageUrl = await this.cloudinaryService.updateImage(publicId.split("/")[1], image, cloudinaryFolders.portfolio, 750, 500);
+    const imageUrl = await this.cloudinaryService.updateImage(publicId.split("/")[1], image, cloudinaryFolders.portfolio, 850, 500);
     const savedData = {
       work_name: updatePortfolioDto.work_name,
       work_image_url: imageUrl.secure_url,
