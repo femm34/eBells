@@ -25,6 +25,8 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { QuotationModule } from './quotation/quotation.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { Quotation } from './quotation/entities/quotation.entity';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -32,8 +34,21 @@ import { QuotationModule } from './quotation/quotation.module';
   MulterModule.register({
     dest: './uploads',
   }),
-
-  TypeOrmModule.forFeature([User, Product, Role]),
+  MailerModule.forRoot({
+    transport: {
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'femm15.mm@gmail.com',
+        pass: 'wckanymcsyavfxxw',
+      },
+    },
+    defaults: {
+      from: '"Arca de la alianza" <arcadelaalianza@gmail.com>',
+    },
+  }),
+  TypeOrmModule.forFeature([User, Product, Role, Quotation]),
   TypeOrmModule.forRoot({
     type: 'mysql',
     host: process.env.DB_HOST,

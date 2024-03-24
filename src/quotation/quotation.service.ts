@@ -1,26 +1,25 @@
+import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { CreateQuotationDto } from './dto/create-quotation.dto';
-import { UpdateQuotationDto } from './dto/update-quotation.dto';
+import { Repository } from 'typeorm';
+import { Quotation } from './entities/quotation.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class QuotationService {
-  create(createQuotationDto: CreateQuotationDto) {
-    return 'This action adds a new quotation';
-  }
+  constructor(@InjectRepository(Quotation) private quotationRepository: Repository<Quotation>, private readonly mailerService: MailerService) { }
 
-  findAll() {
-    return `This action returns all quotation`;
-  }
+  async sendEmail(createQuotationDto: CreateQuotationDto): Promise<void> {
+    const newQuotation = this.quotationRepository.create(createQuotationDto);
+    await this.quotationRepository.save(newQuotation);
 
-  findOne(id: number) {
-    return `This action returns a #${id} quotation`;
-  }
+    const mailToSend = {
+      to: 'femm15.mm@gmail.com',
+      subject: 'Tienes una nueva cotización',
+      html: `Cliente: <strong>${createQuotationDto.name}</strong><br>Email: ${createQuotationDto.client_email}<br>Teléfono: ${createQuotationDto.cellphone_number}<br>Cotización: ${createQuotationDto.message}`
+    };
 
-  update(id: number, updateQuotationDto: UpdateQuotationDto) {
-    return `This action updates a #${id} quotation`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} quotation`;
+    await this.mailerService.sendMail(mailToSend);
+    return;
   }
 }

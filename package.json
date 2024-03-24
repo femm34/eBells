@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs-modules/mailer": "^1.11.2",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
@@ -35,6 +36,8 @@
     "cloudinary": "^2.0.3",
     "cloudinary-build-url": "^0.2.4",
     "mysql2": "^3.9.1",
+    "nestjs-resend": "^0.0.3",
+    "nodemailer": "^6.9.13",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "streamifier": "^0.1.1",
