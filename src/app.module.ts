@@ -24,6 +24,7 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
+import { QuotationModule } from './quotation/quotation.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -57,7 +58,8 @@ import { UsersService } from './users/users.service';
     CardsModule,
     AddressesModule,
     PortfolioModule,
-    CloudinaryModule],
+    CloudinaryModule,
+    QuotationModule],
   controllers: [AppController],
   providers: [AppService, UsersService, JwtService, ProductsService,
   ],
