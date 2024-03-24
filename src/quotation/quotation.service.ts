@@ -15,7 +15,7 @@ export class QuotationService {
 
     const mailToSend = {
       to: 'femm15.mm@gmail.com',
-      subject: 'Tienes una nueva cotización',
+      subject: 'Arca de la Alianza: Tienes una nueva cotización',
       html: `Cliente: <strong>${createQuotationDto.name}</strong><br>Email: ${createQuotationDto.client_email}<br>Teléfono: ${createQuotationDto.cellphone_number}<br>Cotización: ${createQuotationDto.message}`
     };
 

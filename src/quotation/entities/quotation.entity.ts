@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Quotation {
@@ -16,4 +16,7 @@ export class Quotation {
 
   @Column()
   message: string
+
+  @CreateDateColumn()
+  created_at: string
 }

@@ -36,12 +36,12 @@ import { Quotation } from './quotation/entities/quotation.entity';
   }),
   MailerModule.forRoot({
     transport: {
-      host: 'smtp.gmail.com',
+      host: process.env.SMTP_HOST,
       port: 465,
       secure: true,
       auth: {
-        user: 'femm15.mm@gmail.com',
-        pass: 'wckanymcsyavfxxw',
+        user: process.env.SMTP_AUTH_USER,
+        pass: process.env.SMTP_AUTH_PASS,
       },
     },
     defaults: {
